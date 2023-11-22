@@ -1,0 +1,19 @@
+﻿@model ModifyTicketModel
+
+<input type="hidden" asp-for="TId" />
+<div class="card-body">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Title">عنوان</label>
+        <input type="text" class="form-control" asp-for="Title" placeholder="عنوان تیکت">
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">متن </label>
+        <textarea asp-for="Description" class="form-control" placeholder="متن تیکت"></textarea>
+    </div>
+</div>
+<!-- /.card-body -->
+
+<div class="card-footer">
+    <button type="submit" class="btn btn-primary">Save</button>
+</div>

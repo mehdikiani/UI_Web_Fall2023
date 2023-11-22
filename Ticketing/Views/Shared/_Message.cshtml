@@ -1,0 +1,30 @@
+﻿@{
+    var msg = TempData.GetMessage();
+    var bsClass = "alert-info";
+    if(msg!= null)
+    {
+        switch (msg.Type)
+        {
+
+            case MessageType.Success:
+                bsClass = "alert-success";
+                break;
+            case MessageType.Info:
+                bsClass = "alert-info";
+                break;
+            case MessageType.Warning:
+                bsClass = "alert-warning";
+                break;
+            case MessageType.Error:
+                bsClass = "alert-danger";
+                break;
+        }
+    }
+}
+@if (msg != null)
+{
+    <div class="alert @(bsClass)">
+        @(msg.Content)
+    </div>
+
+}

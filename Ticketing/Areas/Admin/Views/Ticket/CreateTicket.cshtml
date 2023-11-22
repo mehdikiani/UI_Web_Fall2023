@@ -1,0 +1,12 @@
+﻿@model ModifyTicketModel
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">درج تیکت جدید</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form asp-controller="Ticket" asp-action="CreateTicket" asp-area="Admin">
+        <partial name="_ModifyTicket" model="@Model" />
+    </form>
+</div>
