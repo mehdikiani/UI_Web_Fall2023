@@ -1,35 +1,74 @@
 ﻿using Ticketing.Data;
 using Ticketing.Core.Models;
+using Ticketing.Core.Entities;
 
 namespace Ticketing.Services
 {
-    public class TicketService :ITicketService
+    public class TicketService : ITicketService
     {
-        public TicketService()
+        private readonly TicketDbContext db;
+        private readonly ILogSerivce logSerivce;
+
+        public TicketService(
+            TicketDbContext db
+            , ILogSerivce logSerivce)
         {
-                
+            this.db = db;
+            this.logSerivce = logSerivce;
         }
 
-        public TicketModel AddTicket(string title, string description)
+        public Ticket AddTicket(string title, string description)
         {
             if (string.IsNullOrWhiteSpace(title))
                 throw new ArgumentNullException(nameof(title));
-            return Tickets.AddTicket(title, description);   
+            if (string.IsNullOrWhiteSpace(description))
+                throw new ArgumentNullException(nameof(description));
+            // return Tickets.AddTicket(title, description);   
+            var now = DateTime.Now;
+            var ticket = new Ticket
+            {
+                Title = title,
+                Description = description,
+                Status = TicketStatus.New,
+                CreateDate = now,
+                ModifyDate = now,
+                Deleted = false
+            };
+            db.Tickets.Add(ticket);
+            db.SaveChanges();
+            return ticket;
         }
 
-        public List<TicketModel> GetAllTickets()
+        public int DeleteTicket(Ticket ticket)
         {
-            return Tickets.AllTickets;
+            if (ticket == null)
+                throw new ArgumentNullException(nameof(ticket));
+            // db.Tickets.Remove(ticket);
+            ticket.Deleted = true;
+            ticket.ModifyDate = DateTime.Now;
+            return db.SaveChanges();
         }
 
-        public TicketModel GetTicketById(int id)
+        public List<Ticket> GetAllTickets()
         {
-            return Tickets.GetTicketById(id);
+            return db.Tickets.Where(p=>!p.Deleted).ToList();
         }
 
-        public TicketModel UpdateTicket(int id, string title, string description)
+        public Ticket GetTicketById(int id)
         {
-           return Tickets.UpdateTicket(id, title, description);
+            //return db.Tickets.FirstOrDefault(p => p.Id == id);
+            return db.Tickets.Find(id);
+        }
+
+        public int UpdateTicket(Ticket ticket)
+        {
+            //Tacking Chaange
+            var result = db.SaveChanges();
+            if (result > 0)
+            {
+                logSerivce.LogInfo($"The ticket {ticket.Title} was updatd at {DateTime.Now}");
+            }
+            return result;
         }
     }
 }

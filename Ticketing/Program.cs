@@ -15,7 +15,7 @@ services.AddDbContext<TicketDbContext>(
 
 
 services.AddTransient<ITicketService, TicketService>();
-
+services.AddTransient<ILogSerivce, LogService>();
 
 var app = builder.Build();
 

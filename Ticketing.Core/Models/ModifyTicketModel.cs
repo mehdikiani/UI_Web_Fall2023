@@ -4,7 +4,7 @@ namespace Ticketing.Core.Models
 {
     public class ModifyTicketModel
     {
-        public int TId { get; set; }
+        public int Id { get; set; }
         [Required(ErrorMessage = "فیلد عنوان الزامی است")]
         [StringLength(128, ErrorMessage = "عنوان حداقل 5 و حداکثر 128 کاراکتر باید باشد", MinimumLength = 5)]
         public string Title { get; set; }

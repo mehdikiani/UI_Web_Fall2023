@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ticketing.Core.Entities
+namespace Ticketing.Services
 {
-    public class EntityBase 
+    public interface ILogSerivce
     {
-        public int Id { get; set; }
-
+        void LogInfo(string message);
     }
 }

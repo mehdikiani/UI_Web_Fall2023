@@ -12,6 +12,8 @@
                 <tr>
                     <th>شناسه</th>
                     <th>عنوان</th>
+                    <th>ایجاد</th>
+                    <th>آخرین ویرایش</th>
                     <th>مدیریت</th>
                 </tr>
             </thead>
@@ -24,12 +26,12 @@
                         <tr>
                             <td>@(ticket.Id)</td>
                             <td>@(ticket.Title)</td>
+                            <td>@(ticket.PersianCreateDateTime)</td>
+                            <td>@(ticket.PersianModifyDateTime)</td>
                             <td>
                                 <div class="btn-group">
-                                  
-
                                     <a asp-controller="Ticket" asp-action="UpdateTicket" asp-area="Admin" asp-route-id="@(ticket.Id)" class="btn btn-info">ویرایش</a>
-                                    <a class="btn btn-info">حذف</a>
+                                    <a asp-controller="Ticket" asp-action="DeleteTicket" asp-area="Admin" asp-route-id="@(ticket.Id)" class="btn btn-danger">حذف</a>
                                 </div>
                             </td>
                         </tr>

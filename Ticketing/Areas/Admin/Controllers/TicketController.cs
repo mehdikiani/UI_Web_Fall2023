@@ -2,7 +2,7 @@
 using Ticketing.Core;
 using Ticketing.Core.Models;
 using Ticketing.Data;
-using Ticketing.Core.Models;
+using Ticketing.Core.EntityMappings;
 using Ticketing.Services;
 
 namespace Ticketing.Areas.Admin.Controllers
@@ -22,7 +22,7 @@ namespace Ticketing.Areas.Admin.Controllers
         public IActionResult Index() => RedirectToAction(nameof(List));
         public IActionResult List()
         {
-            var model = ticketService.GetAllTickets();
+            var model = ticketService.GetAllTickets()?.ToTicketModelList();
             return View(model);
         }
 
@@ -41,7 +41,7 @@ namespace Ticketing.Areas.Admin.Controllers
             }
 
             ticketService.AddTicket(model.Title, model.Description);
-           
+
             return RedirectToAction(nameof(List));
         }
         #endregion
@@ -60,7 +60,7 @@ namespace Ticketing.Areas.Admin.Controllers
             }
             var model = new ModifyTicketModel
             {
-                TId = ticket.Id,
+                Id = ticket.Id,
                 Title = ticket.Title,
                 Description = ticket.Description
             };
@@ -73,17 +73,77 @@ namespace Ticketing.Areas.Admin.Controllers
             {
                 return View(model);
             }
-            var ticket = ticketService.GetTicketById(model.TId);
+            var ticket = ticketService.GetTicketById(model.Id);
             if (ticket == null)
             {
                 ModelState.AddModelError("", "invalid ticket");
                 return View(model);
             }
-            ticketService.UpdateTicket(model.TId, model.Title, model.Description);
-            return RedirectToAction(nameof(List));
+            ticket.Title = model.Title;
+            ticket.Description = model.Description;
+            ticket.ModifyDate = DateTime.Now;
+            var result = ticketService.UpdateTicket(ticket);
+            if (result > 0)
+            {
+                AddSuccess("Ticket was updated successfully");
+                return RedirectToAction(nameof(List));
+            }
+            else
+            {
+                ModelState.AddModelError("", "Error on updating. Please try again.");
+                return View(model);
+            }
+
+
         }
         #endregion
 
 
+        #region Delete Ticket
+        [HttpGet]
+        public IActionResult DeleteTicket(int id)
+        {
+            //Authentication Authorization Accounting
+            var ticket = ticketService.GetTicketById(id);
+            if (ticket == null)
+            //throw new ArgumentException("Ticket not found");
+            {
+                AddError("Invalid Ticket");
+                return RedirectToAction(nameof(List));
+            }
+            var model = new DeleteTicketModel
+            {
+                Id = ticket.Id,
+                Title = ticket.Title
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult DeleteTicket(DeleteTicketModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var ticket = ticketService.GetTicketById(model.Id);
+            if (ticket == null)
+            {
+                ModelState.AddModelError("", "invalid ticket");
+                return View(model);
+            }
+            var result = ticketService.DeleteTicket(ticket);
+            if (result > 0)
+            {
+                AddSuccess("Ticket was deleted successfully");
+                return RedirectToAction(nameof(List));
+            }
+            else
+            {
+                ModelState.AddModelError("", "Error on deleting. Please try again.");
+                return View(model);
+            }
+
+        }
+        #endregion
     }
 }

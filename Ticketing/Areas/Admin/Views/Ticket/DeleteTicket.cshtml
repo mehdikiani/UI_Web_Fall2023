@@ -1,0 +1,24 @@
+﻿@model DeleteTicketModel
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">حذف تیکت </h3>
+    </div>        <form asp-controller="Ticket" asp-action="DeleteTicket" asp-area="Admin">
+
+        <div class="card-body">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Title" />
+            <div class="alert alert-danger">
+                آیا تیکت زیر حذف شود؟
+                <br />
+                '@(Model.Title)'
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="بله" class="btn btn-danger" />
+            <a asp-action="List" asp-controller="Ticket" asp-area="Admin" class="btn btn-primary">خیر</a>
+
+        </div>
+    </form>
+</div>

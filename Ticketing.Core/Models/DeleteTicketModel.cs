@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ticketing.Core.Entities
+namespace Ticketing.Core.Models
 {
-    public class EntityBase 
+    public class DeleteTicketModel
     {
         public int Id { get; set; }
-
+        public string? Title { get; set; }
     }
 }

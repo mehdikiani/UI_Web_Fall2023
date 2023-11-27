@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ticketing.Core.Entities
 {
-    public class Ticket : EntityBase
+    public class Ticket : AuditEntityBase
     {
         public string Title { get; set; }
         public string Description { get; set; }
