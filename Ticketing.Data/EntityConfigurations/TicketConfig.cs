@@ -21,6 +21,11 @@ namespace Ticketing.Data.EntityConfigurations
                 .IsRequired() .HasMaxLength(512);
             builder.Property(p => p.Status)
                 .IsRequired().HasDefaultValue(TicketStatus.New);
+
+            builder.HasOne(p => p.Section)
+                .WithMany(p => p.Tickets)
+                .HasForeignKey(p => p.SectionId)
+                .OnDelete(DeleteBehavior.Restrict);
             
         }
     }

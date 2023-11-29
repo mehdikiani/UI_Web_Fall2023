@@ -12,12 +12,15 @@ namespace Ticketing.Areas.Admin.Controllers
     public class TicketController : BaseAdminController
     {
         private readonly ITicketService ticketService;
+        private readonly ISectionService sectionService;
 
         public TicketController(
-            ITicketService ticketService)
+            ITicketService ticketService
+            , ISectionService sectionService)
         {
             //ticketService = new TicketService();
             this.ticketService = ticketService;
+            this.sectionService = sectionService;
         }
         public IActionResult Index() => RedirectToAction(nameof(List));
         public IActionResult List()
@@ -25,12 +28,19 @@ namespace Ticketing.Areas.Admin.Controllers
             var model = ticketService.GetAllTickets()?.ToTicketModelList();
             return View(model);
         }
-
+        public IActionResult SectionTickets(int secId)
+        {
+            var model = ticketService.GetTicketsBySectionId(secId)?.ToTicketModelList();
+            return View(model);
+        }
         #region CreateTicket
         [HttpGet]
         public IActionResult CreateTicket()
         {
-            return View(new ModifyTicketModel());
+            var model = new ModifyTicketModel();
+            model.Sections = sectionService.GetAllSections()?.ToSectionModelList();
+
+            return View(model);
         }
         [HttpPost]
         public IActionResult CreateTicket(ModifyTicketModel model)
@@ -40,7 +50,7 @@ namespace Ticketing.Areas.Admin.Controllers
                 return View(model);
             }
 
-            ticketService.AddTicket(model.Title, model.Description);
+            ticketService.AddTicket(model.Title, model.Description, model.SectionId);
 
             return RedirectToAction(nameof(List));
         }

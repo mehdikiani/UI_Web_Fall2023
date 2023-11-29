@@ -1,6 +1,7 @@
 ﻿using Ticketing.Data;
 using Ticketing.Core.Models;
 using Ticketing.Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ticketing.Services
 {
@@ -17,7 +18,7 @@ namespace Ticketing.Services
             this.logSerivce = logSerivce;
         }
 
-        public Ticket AddTicket(string title, string description)
+        public Ticket AddTicket(string title, string description, int sectionId)
         {
             if (string.IsNullOrWhiteSpace(title))
                 throw new ArgumentNullException(nameof(title));
@@ -32,7 +33,8 @@ namespace Ticketing.Services
                 Status = TicketStatus.New,
                 CreateDate = now,
                 ModifyDate = now,
-                Deleted = false
+                Deleted = false,
+                SectionId = sectionId
             };
             db.Tickets.Add(ticket);
             db.SaveChanges();
@@ -51,9 +53,20 @@ namespace Ticketing.Services
 
         public List<Ticket> GetAllTickets()
         {
-            return db.Tickets.Where(p=>!p.Deleted).ToList();
-        }
+            return db.Tickets
+                .Where(p => !p.Deleted)
+                .Include(p => p.Section)
+                .ToList();
 
+        }
+        public List<Ticket> GetTicketsBySectionId(int sectionId)
+        {
+            return db.Tickets
+                .Where(p => !p.Deleted && p.SectionId == sectionId)
+                .Include(p => p.Section)
+                .ToList();
+
+        }
         public Ticket GetTicketById(int id)
         {
             //return db.Tickets.FirstOrDefault(p => p.Id == id);

@@ -1,4 +1,4 @@
-﻿@model ModifyTicketModel
+﻿@model ModifySectionModel
 
 <input type="hidden" asp-for="Id" />
 <div class="card-body">
@@ -8,13 +8,9 @@
         <input type="text" class="form-control" asp-for="Title" placeholder="عنوان تیکت">
     </div>
     <div class="form-group">
-        <label asp-for="Description">متن </label>
-        <textarea asp-for="Description" class="form-control" placeholder="متن تیکت"></textarea>
-    </div>
-    <div class="form-group">
-        <label asp-for="SectionId">مربوط به بخش </label>
-        <select asp-for="SectionId"  asp-items="@(new SelectList(Model.Sections,"Id","Title"))" class="form-control">
-        </select>
+        <input type="checkbox" asp-for="IsActive" />
+        <label asp-for="IsActive">فعال </label>
+        
     </div>
 </div>
 <!-- /.card-body -->

@@ -6,7 +6,8 @@ namespace Ticketing.Services
     public interface ITicketService
     {
         List<Ticket> GetAllTickets();
-        Ticket AddTicket(string title, string description);
+        List<Ticket> GetTicketsBySectionId(int sectionId);
+        Ticket AddTicket(string title, string description,int sectionId);
         Ticket GetTicketById(int id);
         int UpdateTicket(Ticket ticket);
         int DeleteTicket(Ticket ticket);

@@ -1,9 +1,9 @@
-﻿@model List<TicketModel>
+﻿@model List<SectionModel>
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">
             <i class="fas fa-chart-pie mr-1"></i>
-            تیکت های من
+            لیست بخش ها
         </h3>
     </div><!-- /.card-header -->
     <div class="card-body">
@@ -12,7 +12,7 @@
                 <tr>
                     <th>شناسه</th>
                     <th>عنوان</th>
-                    <th>بخش</th>
+                    <th>وضعیت</th>
                     <th>ایجاد</th>
                     <th>آخرین ویرایش</th>
                     <th>مدیریت</th>
@@ -22,18 +22,18 @@
                 @if (Model?.Any() ?? false)
                 {
 
-                    foreach (var ticket in Model)
+                    foreach (var section in Model)
                     {
                         <tr>
-                            <td>@(ticket.Id)</td>
-                            <td>@(ticket.Title)</td>
-                            <td><a asp-controller="Ticket" asp-action="SectionTickets" asp-area="Admin" asp-route-secId="@(ticket.SectionId)">@(ticket.SectionTitle)</a></td>
-                            <td>@(ticket.PersianCreateDateTime)</td>
-                            <td>@(ticket.PersianModifyDateTime)</td>
+                            <td>@(section.Id)</td>
+                            <td>@(section.Title)</td>
+                            <td>@(section.IsActive.ToString())</td>
+                            <td>@(section.PersianCreateDateTime)</td>
+                            <td>@(section.PersianModifyDateTime)</td>
                             <td>
                                 <div class="btn-group">
-                                    <a asp-controller="Ticket" asp-action="UpdateTicket" asp-area="Admin" asp-route-id="@(ticket.Id)" class="btn btn-info">ویرایش</a>
-                                    <a asp-controller="Ticket" asp-action="DeleteTicket" asp-area="Admin" asp-route-id="@(ticket.Id)" class="btn btn-danger">حذف</a>
+                                    <a asp-controller="Section" asp-action="UpdateSection" asp-area="Admin" asp-route-id="@(section.Id)" class="btn btn-info">ویرایش</a>
+                                    <a asp-controller="Section" asp-action="DeleteSection" asp-area="Admin" asp-route-id="@(section.Id)" class="btn btn-danger">حذف</a>
                                 </div>
                             </td>
                         </tr>
@@ -42,7 +42,7 @@
                 else
                 {
                     <tr>
-                        <td colspan="6">No Data</td>
+                        <td colspan="3">No Data</td>
                     </tr>
                 }
             </tbody>

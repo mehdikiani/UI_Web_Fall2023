@@ -1,0 +1,12 @@
+﻿@model ModifySectionModel
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">درج بخش جدید</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form asp-controller="Section" asp-action="CreateSection" asp-area="Admin">
+        <partial name="_ModifySection" model="@Model" />
+    </form>
+</div>

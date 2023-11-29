@@ -212,7 +212,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
 
-                        <li class="nav-header">تیکت </li>
+                        <li class="nav-header">منوی سایت </li>
                         <li class="nav-item">
                             <a asp-controller="Ticket" asp-action="List" asp-area="Admin" class="nav-link">
                                 <i class="nav-icon far fa-calendar-alt"></i>
@@ -230,7 +230,18 @@
                                 </p>
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a asp-controller="Section" asp-action="List" asp-area="Admin" class="nav-link">
+                                <i class="nav-icon far fa-calendar-alt"></i>
+                                    بخش های پشتیبانی
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Section" asp-action="CreateSection" asp-area="Admin" class="nav-link">
+                                <i class="nav-icon far fa-calendar-alt"></i>
+                                افزودن بخش جدید 
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

@@ -12,6 +12,7 @@ namespace Ticketing.Data
     public class TicketDbContext : DbContext
     {
         public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Section> Sections { get; set; }
         public TicketDbContext(
             DbContextOptions<TicketDbContext> options)
             : base(options)
@@ -24,7 +25,7 @@ namespace Ticketing.Data
             //       .HasKey(t => t.Id)
             //       .HasName("Tickets");
             modelBuilder.ApplyConfiguration(new TicketConfig());
-
+            modelBuilder.ApplyConfiguration(new SectionConfig());
         }
 
     }
