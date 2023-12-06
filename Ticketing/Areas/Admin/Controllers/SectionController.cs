@@ -3,6 +3,7 @@ using Ticketing.Core.Models;
 using Ticketing.Core;
 using Ticketing.Services;
 using Ticketing.Core.EntityMappings;
+using Ticketing.Data;
 namespace Ticketing.Areas.Admin.Controllers
 {
     [Area("Admin")]

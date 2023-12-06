@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Ticketing.Core.Entities
 {
-    public class EntityBase 
+    public enum EntityAction
     {
-        public int Id { get; set; }
-
-        //public virtual bool IsValidState(EntityAction action = EntityAction.None) { return true; }
-
+        None,
+        Insert,
+        Update,
+        Delete
+        
     }
 }

@@ -5,10 +5,10 @@
         <h3 class="card-title">حذف بخش </h3>
     </div>      
     <form asp-controller="Section" asp-action="DeleteSection" asp-area="Admin">
-
         <div class="card-body">
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="Title" />
+            <div asp-validation-summary="All"></div>
             <div class="alert alert-danger">
                 آیا بخش زیر حذف شود؟
                 <br />

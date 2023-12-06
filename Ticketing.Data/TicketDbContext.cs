@@ -11,8 +11,8 @@ namespace Ticketing.Data
 {
     public class TicketDbContext : DbContext
     {
-        public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<Section> Sections { get; set; }
+        //public DbSet<Ticket> Tickets { get; set; }
+        //public DbSet<Section> Sections { get; set; }
         public TicketDbContext(
             DbContextOptions<TicketDbContext> options)
             : base(options)

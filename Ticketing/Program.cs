@@ -13,6 +13,9 @@ services.AddDbContext<TicketDbContext>(
     }
     );
 
+//services.AddTransient<ITicketRepository, TicketRepository>();
+
+services.AddTransient(typeof(IRepository<>),typeof(Repository<>));
 
 services.AddTransient<ITicketService, TicketService>();
 services.AddTransient<ISectionService, SectionService>();

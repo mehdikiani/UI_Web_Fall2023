@@ -38,15 +38,16 @@ namespace Ticketing.Areas.Admin.Controllers
         public IActionResult CreateTicket()
         {
             var model = new ModifyTicketModel();
-            model.Sections = sectionService.GetAllSections()?.ToSectionModelList();
-
+            PrepareModel(model);
             return View(model);
         }
         [HttpPost]
         public IActionResult CreateTicket(ModifyTicketModel model)
         {
+          
             if (!ModelState.IsValid)
             {
+                PrepareModel(model);
                 return View(model);
             }
 
@@ -72,21 +73,26 @@ namespace Ticketing.Areas.Admin.Controllers
             {
                 Id = ticket.Id,
                 Title = ticket.Title,
-                Description = ticket.Description
+                Description = ticket.Description,
+                SectionId =ticket.SectionId
             };
+            PrepareModel(model);
             return View(model);
         }
         [HttpPost]
         public IActionResult UpdateTicket(ModifyTicketModel model)
         {
+           
             if (!ModelState.IsValid)
             {
+                PrepareModel(model);
                 return View(model);
             }
             var ticket = ticketService.GetTicketById(model.Id);
             if (ticket == null)
             {
                 ModelState.AddModelError("", "invalid ticket");
+                PrepareModel(model);
                 return View(model);
             }
             ticket.Title = model.Title;
@@ -101,6 +107,7 @@ namespace Ticketing.Areas.Admin.Controllers
             else
             {
                 ModelState.AddModelError("", "Error on updating. Please try again.");
+                PrepareModel(model);
                 return View(model);
             }
 
@@ -155,5 +162,10 @@ namespace Ticketing.Areas.Admin.Controllers
 
         }
         #endregion
+
+        private void PrepareModel(ModifyTicketModel model)
+        {
+            model.Sections = sectionService.GetAllSections()?.ToSectionModelList();
+        }
     }
 }

@@ -7,15 +7,21 @@ namespace Ticketing.Services
 {
     public class TicketService : ITicketService
     {
-        private readonly TicketDbContext db;
+       
         private readonly ILogSerivce logSerivce;
+        private readonly IRepository<Ticket> ticketRepository;
+
+        //private readonly ITicketRepository ticketRepository;
 
         public TicketService(
-            TicketDbContext db
-            , ILogSerivce logSerivce)
+             ILogSerivce logSerivce
+            //,ITicketRepository ticketRepository)
+            ,IRepository<Ticket> ticketRepository
+            )
         {
-            this.db = db;
             this.logSerivce = logSerivce;
+            this.ticketRepository = ticketRepository;
+            //this.ticketRepository = ticketRepository;
         }
 
         public Ticket AddTicket(string title, string description, int sectionId)
@@ -36,8 +42,7 @@ namespace Ticketing.Services
                 Deleted = false,
                 SectionId = sectionId
             };
-            db.Tickets.Add(ticket);
-            db.SaveChanges();
+            ticketRepository.Insert(ticket);
             return ticket;
         }
 
@@ -48,12 +53,12 @@ namespace Ticketing.Services
             // db.Tickets.Remove(ticket);
             ticket.Deleted = true;
             ticket.ModifyDate = DateTime.Now;
-            return db.SaveChanges();
+            return ticketRepository.Update(ticket);
         }
 
         public List<Ticket> GetAllTickets()
         {
-            return db.Tickets
+            return ticketRepository.GetAll()
                 .Where(p => !p.Deleted)
                 .Include(p => p.Section)
                 .ToList();
@@ -61,7 +66,7 @@ namespace Ticketing.Services
         }
         public List<Ticket> GetTicketsBySectionId(int sectionId)
         {
-            return db.Tickets
+            return ticketRepository.GetAll()
                 .Where(p => !p.Deleted && p.SectionId == sectionId)
                 .Include(p => p.Section)
                 .ToList();
@@ -69,14 +74,15 @@ namespace Ticketing.Services
         }
         public Ticket GetTicketById(int id)
         {
-            //return db.Tickets.FirstOrDefault(p => p.Id == id);
-            return db.Tickets.Find(id);
+            return ticketRepository.GetAll()
+                .FirstOrDefault(p => p.Id == id && !p.Deleted);
+            //return db.Tickets.Find(id);
         }
 
         public int UpdateTicket(Ticket ticket)
         {
             //Tacking Chaange
-            var result = db.SaveChanges();
+            var result = ticketRepository.Update(ticket);
             if (result > 0)
             {
                 logSerivce.LogInfo($"The ticket {ticket.Title} was updatd at {DateTime.Now}");
