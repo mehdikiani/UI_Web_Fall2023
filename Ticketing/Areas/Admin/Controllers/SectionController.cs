@@ -17,27 +17,27 @@ namespace Ticketing.Areas.Admin.Controllers
             this.sectionService = sectionService;
         }
         public IActionResult Index() => RedirectToAction(nameof(List));
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
-            var model = sectionService.GetAllSections()?.ToSectionModelList();
+            var model =(await sectionService.GetAllSectionsAsync())?.ToSectionModelList();
             return View(model);
         }
 
         #region CreateSection
         [HttpGet]
-        public IActionResult CreateSection()
+        public  IActionResult CreateSection()
         {
             return View(new ModifySectionModel());
         }
         [HttpPost]
-        public IActionResult CreateSection(ModifySectionModel model)
+        public async Task<IActionResult> CreateSection(ModifySectionModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            sectionService.AddSection(model.Title, model.IsActive);
+            await sectionService.AddSectionAsync(model.Title, model.IsActive);
 
             return RedirectToAction(nameof(List));
         }
@@ -45,10 +45,10 @@ namespace Ticketing.Areas.Admin.Controllers
 
         #region Update Section
         [HttpGet]
-        public IActionResult UpdateSection(int id)
+        public async Task<IActionResult> UpdateSection(int id)
         {
             //Authentication Authorization Accounting
-            var section = sectionService.GetSectionById(id);
+            var section =await sectionService.GetSectionByIdAsync(id);
             if (section == null)
             //throw new ArgumentException("Section not found");
             {
@@ -64,13 +64,13 @@ namespace Ticketing.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult UpdateSection(ModifySectionModel model)
+        public async Task<IActionResult> UpdateSection(ModifySectionModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var section = sectionService.GetSectionById(model.Id);
+            var section =await sectionService.GetSectionByIdAsync(model.Id);
             if (section == null)
             {
                 ModelState.AddModelError("", "invalid section");
@@ -79,7 +79,7 @@ namespace Ticketing.Areas.Admin.Controllers
             section.Title = model.Title;
             section.IsActive = model.IsActive;
             section.ModifyDate = DateTime.Now;
-            var result = sectionService.UpdateSection(section);
+            var result =await sectionService.UpdateSectionAsync(section);
             if (result > 0)
             {
                 AddSuccess("Section was updated successfully");
@@ -98,10 +98,10 @@ namespace Ticketing.Areas.Admin.Controllers
 
         #region Delete Section
         [HttpGet]
-        public IActionResult DeleteSection(int id)
+        public async Task<IActionResult> DeleteSection(int id)
         {
             //Authentication Authorization Accounting
-            var section = sectionService.GetSectionById(id);
+            var section =await sectionService.GetSectionByIdAsync(id);
             if (section == null)
             //throw new ArgumentException("Section not found");
             {
@@ -116,19 +116,19 @@ namespace Ticketing.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult DeleteSection(DeleteSectionModel model)
+        public async Task<IActionResult> DeleteSection(DeleteSectionModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var section = sectionService.GetSectionById(model.Id);
+            var section =await sectionService.GetSectionByIdAsync(model.Id);
             if (section == null)
             {
                 ModelState.AddModelError("", "invalid section");
                 return View(model);
             }
-            var result = sectionService.DeleteSection(section);
+            var result =await sectionService.DeleteSectionAsync(section);
             if (result > 0)
             {
                 AddSuccess("Section was deleted successfully");

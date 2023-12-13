@@ -35,6 +35,12 @@ namespace Ticketing.Data
             return db.SaveChanges();
         }
 
+        public async Task<int> DeleteAsync(T entity, CancellationToken token = default)
+        {
+            Entities.Remove(entity);
+            return await db.SaveChangesAsync();
+        }
+
         public IQueryable<T> GetAll()
         {
             return Entities;
@@ -48,6 +54,21 @@ namespace Ticketing.Data
             //    return 0;
             Entities.Add(entity);
             return db.SaveChanges();
+        }
+
+        public async Task<int> InsertAsync(T entity, CancellationToken token = default)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+            //if (!entity.IsValidState(EntityAction.Insert))
+            //    return 0;
+            Entities.Add(entity);
+            return await db.SaveChangesAsync();
+        }
+
+        public async Task<int> UpdateAsync(T entity, CancellationToken token = default)
+        {
+            return await db.SaveChangesAsync();
         }
 
         public int Update(T entity)

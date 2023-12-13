@@ -17,7 +17,7 @@ namespace Ticketing.Data
             DbContextOptions<TicketDbContext> options)
             : base(options)
         {
-
+            
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

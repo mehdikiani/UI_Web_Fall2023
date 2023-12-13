@@ -14,5 +14,9 @@ namespace Ticketing.Data
         int Insert(T entity);
         int Update(T entity);
         int Delete(T entity);
+
+        Task<int> InsertAsync(T entity, CancellationToken token=default);
+        Task<int> UpdateAsync(T entity, CancellationToken token = default);
+        Task<int> DeleteAsync(T entity, CancellationToken token = default);
     }
 }
