@@ -12,7 +12,7 @@ using Ticketing.Data;
 namespace Ticketing.Data.Migrations
 {
     [DbContext(typeof(TicketDbContext))]
-    [Migration("20231216134447_LandingPage")]
+    [Migration("20231216150315_Landing-Page")]
     partial class LandingPage
     {
         /// <inheritdoc />
@@ -34,19 +34,9 @@ namespace Ticketing.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Section1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Section2")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Section3")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Section4")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

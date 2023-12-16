@@ -16,10 +16,8 @@ namespace Ticketing.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Section1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Section2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Section3 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Section4 = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Section1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Section2 = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
