@@ -187,7 +187,7 @@ h2 {
 
 .tm-form-footer {
     margin-top: -55px;
-    padding-top: 100px;
+    padding-top: 30px;
     padding-bottom: 30px;
 }
 
@@ -425,6 +425,5 @@ select:focus {
 }
 
 .rounded-circle {
-    width: 200px;
-    height: 200px;
+    width: 200px; height: 200px;
 }

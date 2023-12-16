@@ -10,7 +10,12 @@
         </div>
         <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
             <div class="tm-flex-center p-5">
-                <q class="tm-quote tm-text-color-gray">@Model.OrderBy(r => Guid.NewGuid()).Take(1)</q>
+                <q class="tm-quote tm-text-color-gray">
+                    @{
+                        int toSkip = new Random().Next(0, Model.Count());
+                     }
+                    @Model.Skip(toSkip).Take(1).First().section1.ToString()
+                    </q>
             </div>
         </div>
     </section>
@@ -21,7 +26,13 @@
             <div class="tm-flex-center p-5">
                 <div class="tm-md-flex-center">
                     <h2 class="tm-text-color-primary mb-4">رضایت مشتریان</h2>
-                    <p class="mb-4">@Model.OrderBy(r => Guid.NewGuid()).Take(1)</p>
+                    <p class="mb-4">
+                        @{
+                            toSkip = new Random().Next(0, Model.Count());
+                         }
+                        @Model.Skip(toSkip).Take(1).First().section2.ToString()
+                        
+                    </p>
                 </div>
             </div>
         </div>
@@ -29,7 +40,7 @@
             <div class="tm-flex-center p-5 tm-bg-color-primary">
                 <div class="tm-max-w-400 tm-flex-center tm-flex-col">
                     <img src="img/image-04.jpg" alt="Image" class="rounded-circle mb-4">
-                    <p class="tm-text-color-white small tm-font-thin mb-0">Nullam eleifend, ipsum eu aliquet fermentum , odio urna dignissim ante, semper maximus libero nisl non nibh.</p>
+                    <p class="tm-text-color-white small tm-font-thin mb-0">مدیریت و پشتیبانی 24 ساعته در 7 روز هفته</p>
                 </div>
             </div>
         </div>
@@ -43,8 +54,8 @@
         <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
             <div class="tm-flex-center p-5">
                 <div class="tm-flex-center tm-flex-col">
-                    <h2 class="tm-align-left">Loerm ipsum dolor sit amet</h2>
-                    <p>This is one-page HTML5 template that you can use for any purpose. Please tell your friends about <a href="https://www.facebook.com/templatemo" target="_parent">TemplateMo</a> website. Thank you.</p>
+                    <h2 class="tm-align-left">عملکرد پشتیبانی</h2>
+                    <p>با به کار گیری خبره و ماهر ترین کارمندان و پشتیبانان که خدمت گذار تک تک شما عزیزان هستند</p>
                 </div>
             </div>
         </div>
@@ -55,10 +66,9 @@
         <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
             <div class="tm-flex-center pl-5 pr-5 pt-5 pb-5">
                 <div class="tm-md-flex-center">
-                    <h2 class="mb-4 tm-text-color-primary">Nullam auctor ornare finibus</h2>
-                    <p>Cras eu dolor lorem. Cras justo mauris, rhoncus in mauris ac, pellentesque pulvinar metus. Suspendisse consectetur consequat diam, ac dignissim mauris gravida vitae. Vestibulum blandit vestibulum mi a viverra.</p>
-                    <p class="mb-4">Fusce porta lectus vel elit condimentum porttitor. Maecenas at quam congue, sollicitudin risus quis, ultricies enim. Vivamus sodales, tellus ac quismod dignissim, metus ligula porttitor enim.</p>
-                    <p class="mb-4">Sed fermentum odio mollis libero iaculis ultrices. Mauris et nibh mi. Nullam vel sapien dolor. Vestibulum ipsum quam, aliquet ac pharetra in, suscipit eu risus. Etiam rutrum eros ultrices, consectetur felis ultrices, vehicula purus.</p>
+                    <h2 class="mb-4 tm-text-color-primary">درباره ما</h2>
+                    <p class="mb-4">اپلیکیشن فلان جایی که نوآوری و رضایت مشتری برای برای ما در اولویت هستند. سرویس خدمات مشتری پیشرفته ما، به دقت ساخته شده تا شیوه ارتباط کسب و کارها با مشتریان خود را متحول کند. با تمرکز بر کاربرپسندی و کارایی، پلتفرم ما به طور یکپارچه در جریان کار شما ادغام می شود و تیم پشتیبانی شما را برای ارائه راه حل های سریع و شخصی توانمند می کند.</p>
+                    <p class="mb-4">ما نقش محوری خدمات مشتری درخشان در ایجاد روابط پایدار را درک می کنیم. اپلیکیشن ما فقط یک ابزار نیست. این یک تسریع کننده برای تجربیات مثبت است. چه شما یک استارتاپ باشید که به دنبال ایجاد پایه ای قوی از اعتماد مشتری هستید یا یک شرکت مستقر با هدف ارتقای خدمات شما، پلتفرم ما برای انطباق و مقیاس با نیازهای شما طراحی شده است. در سفری به ما بپیوندید که در آن رضایت مشتری فقط یک هدف نیست - این یک اشتیاق مشترک است که هر ویژگی و نوآوری را به شما ارائه می دهد. تجربه خدمات مشتری خود را با ما ارتقا دهید، جایی که برتری با تعامل روبرو می شود.</p>
                 </div>
             </div>
         </div>
@@ -73,22 +83,21 @@
             <div class="row tm-container-inner">
                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="tm-footer-info-box">
-                        <h4>Lorem ipsum dolor</h4>
-                        <address>
-                            1010 Vivamaus viverra<br>
-                            Leo vel porttitor sodales<br>
-                            Non eleifend 10980
-                        </address>
+                        <h4>ارتباط با ما</h4>
+                        <h5>شماره تماس</h5>
+                        <p>
+                            +989123456789<br>
+                        </p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="tm-footer-info-box">
-                        <p>
-                            Maecenas fermentum<br>
-                            Nam eu justo et urna<br>
-                            Semper maximus libero<br>
-                            Etiam magna quam
-                        </p>
+                        <h5>آدرس</h5>
+                        <address>
+                            اصفهان خیابان هزار جریب<br>
+                            دانشکده فنی مهندسی<br>
+                            کلاس 14
+                        </address>
                     </div>
                 </div>
             </div>
@@ -98,7 +107,7 @@
     <!-- Footer -->
     <div class="row">
         <div class="col-lg-12">
-            <p class="text-center small tm-copyright-text mb-0">Copyright &copy; <span class="tm-current-year">2018</span> Your Company Name | Designed by <a href="http://templatemo.com" class="tm-text-color-gray" target="_parent">Template Mo</a></p>
+            <p class="text-center small tm-copyright-text mb-0">Copyright &copy; <span class="tm-current-year">2023</span> UI Web | Designed by <a href="https://github.com/Ali-Pourgheysari" class="tm-text-color-gray" target="_parent">Ali Pourgheysari</a></p>
         </div>
     </div>
 </div>
