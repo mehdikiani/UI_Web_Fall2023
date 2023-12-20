@@ -1,13 +1,8 @@
-﻿/*
-
-Magazee Template
-
-http://www.templatemo.com/tm-514-magazee
-
-*/
-
+﻿*{
+    font-family: 'B Nazanin';
+}
 body {
-    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-family: 'B Nazanin';
     font-size: 18px;
     color: #666666;
     background-color: #f4f4f4;
@@ -15,6 +10,7 @@ body {
 
 p, q {
     line-height: 1.8;
+    font-family: 'B Nazanin';
 }
 
 h2 {
@@ -26,6 +22,7 @@ h2 {
 }
 
 .tm-quote {
+    font-family: 'B Nazanin';
     font-size: 1.35rem;
     font-style: italic;
 }

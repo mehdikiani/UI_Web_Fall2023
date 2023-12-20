@@ -2,15 +2,15 @@
 <div class="container">
 
     <!-- 1st section -->
-    <section class="row tm-section">
+    <section class="row tm-section" style="padding-top: 60px;">
         <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0">
             <div class="tm-flex-center p-5 tm-bg-color-primary tm-section-min-h">
-                <h1 class="tm-text-color-white tm-site-name">سامانه خدمات مشتری</h1>
+                <h1 class="tm-text-color-white tm-site-name" dir="rtl">سامانه خدمات مشتری</h1>
             </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
             <div class="tm-flex-center p-5">
-                <q class="tm-quote tm-text-color-gray">
+                <q class="tm-text-color-gray" dir="rtl" style="text-align:center;">
                     @{
                         int toSkip = new Random().Next(0, Model.Count());
                      }
@@ -24,13 +24,13 @@
     <section class="row tm-section tm-col-md-reverse">
         <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
             <div class="tm-flex-center p-5">
-                <div class="tm-md-flex-center">
-                    <h2 class="tm-text-color-primary mb-4">رضایت مشتریان</h2>
-                    <p class="mb-4">
+                <div class="tm-quote tm-md-flex-center">
+                    <h2 class="tm-text-color-primary mb-4" dir="rtl" style="font-family:'B Nazanin';">رضایت مشتریان</h2>
+                    <p class="mb-4" dir="rtl" style="font-family:'B Nazanin';">
                         @{
                             toSkip = new Random().Next(0, Model.Count());
                          }
-                        @Model.Skip(toSkip).Take(1).First().section2.ToString()
+                        "@Model.Skip(toSkip).Take(1).First().section2.ToString()"
                         
                     </p>
                 </div>
@@ -47,7 +47,7 @@
     </section>
 
     <!-- 3rd Section -->
-    <section class="row tm-section tm-mb-30">
+    <section class="row tm-section tm-mb-30" id="3">
         <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
             <img src="img/image-01.jpg" alt="Image" class="img-fluid">
         </div>
@@ -55,20 +55,20 @@
             <div class="tm-flex-center p-5">
                 <div class="tm-flex-center tm-flex-col">
                     <h2 class="tm-align-left">عملکرد پشتیبانی</h2>
-                    <p>با به کار گیری خبره و ماهر ترین کارمندان و پشتیبانان که خدمت گذار تک تک شما عزیزان هستند</p>
+                    <p dir="rtl">با به کار گیری خبره و ماهر ترین کارمندان و پشتیبانان که خدمت گذار تک تک شما عزیزان هستند</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 4th Section -->
-    <section class="row tm-section tm-mb-30">
+    <section class="row tm-section tm-mb-30" id="4">
         <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
             <div class="tm-flex-center pl-5 pr-5 pt-5 pb-5">
                 <div class="tm-md-flex-center">
-                    <h2 class="mb-4 tm-text-color-primary">درباره ما</h2>
-                    <p class="mb-4">اپلیکیشن فلان جایی که نوآوری و رضایت مشتری برای برای ما در اولویت هستند. سرویس خدمات مشتری پیشرفته ما، به دقت ساخته شده تا شیوه ارتباط کسب و کارها با مشتریان خود را متحول کند. با تمرکز بر کاربرپسندی و کارایی، پلتفرم ما به طور یکپارچه در جریان کار شما ادغام می شود و تیم پشتیبانی شما را برای ارائه راه حل های سریع و شخصی توانمند می کند.</p>
-                    <p class="mb-4">ما نقش محوری خدمات مشتری درخشان در ایجاد روابط پایدار را درک می کنیم. اپلیکیشن ما فقط یک ابزار نیست. این یک تسریع کننده برای تجربیات مثبت است. چه شما یک استارتاپ باشید که به دنبال ایجاد پایه ای قوی از اعتماد مشتری هستید یا یک شرکت مستقر با هدف ارتقای خدمات شما، پلتفرم ما برای انطباق و مقیاس با نیازهای شما طراحی شده است. در سفری به ما بپیوندید که در آن رضایت مشتری فقط یک هدف نیست - این یک اشتیاق مشترک است که هر ویژگی و نوآوری را به شما ارائه می دهد. تجربه خدمات مشتری خود را با ما ارتقا دهید، جایی که برتری با تعامل روبرو می شود.</p>
+                    <h2 class="mb-4 tm-text-color-primary" dir="rtl">درباره ما</h2>
+                    <p class="mb-4" dir="rtl">اپلیکیشن فلان جایی که نوآوری و رضایت مشتری برای برای ما در اولویت هستند. سرویس خدمات مشتری پیشرفته ما، به دقت ساخته شده تا شیوه ارتباط کسب و کارها با مشتریان خود را متحول کند. با تمرکز بر کاربرپسندی و کارایی، پلتفرم ما به طور یکپارچه در جریان کار شما ادغام می شود و تیم پشتیبانی شما را برای ارائه راه حل های سریع و شخصی توانمند می کند.</p>
+                    <p class="mb-4" dir="rtl">ما نقش محوری خدمات مشتری درخشان در ایجاد روابط پایدار را درک می کنیم. اپلیکیشن ما فقط یک ابزار نیست. این یک تسریع کننده برای تجربیات مثبت است. چه شما یک استارتاپ باشید که به دنبال ایجاد پایه ای قوی از اعتماد مشتری هستید یا یک شرکت مستقر با هدف ارتقای خدمات شما، پلتفرم ما برای انطباق و مقیاس با نیازهای شما طراحی شده است. در سفری به ما بپیوندید که در آن رضایت مشتری فقط یک هدف نیست - این یک اشتیاق مشترک است که هر ویژگی و نوآوری را به شما ارائه می دهد. تجربه خدمات مشتری خود را با ما ارتقا دهید، جایی که برتری با تعامل روبرو می شود.</p>
                 </div>
             </div>
         </div>
@@ -76,38 +76,4 @@
             <img src="img/image-02.jpg" alt="Image" class="img-fluid">
         </div>
     </section>
-
-    <!-- 6th Section -->
-    <section class="row">
-        <div class="col-lg-12 tm-bg-color-gray tm-text-color-white tm-font-thin tm-form-footer">
-            <div class="row tm-container-inner">
-                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="tm-footer-info-box">
-                        <h4>ارتباط با ما</h4>
-                        <h5>شماره تماس</h5>
-                        <p>
-                            +989123456789<br>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="tm-footer-info-box">
-                        <h5>آدرس</h5>
-                        <address>
-                            اصفهان خیابان هزار جریب<br>
-                            دانشکده فنی مهندسی<br>
-                            کلاس 14
-                        </address>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <div class="row">
-        <div class="col-lg-12">
-            <p class="text-center small tm-copyright-text mb-0">Copyright &copy; <span class="tm-current-year">2023</span> UI Web | Designed by <a href="https://github.com/Ali-Pourgheysari" class="tm-text-color-gray" target="_parent">Ali Pourgheysari</a></p>
-        </div>
-    </div>
 </div>
