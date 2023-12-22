@@ -3,21 +3,22 @@ using Ticketing.Core.Entities;
 using Ticketing.Core.EntityMappings;
 using Ticketing.Core.Models;
 using Ticketing.Data;
+using Ticketing.Services;
 
 namespace Ticketing.Controllers
 {
     public class HomeController :Controller
     {
-        private readonly IRepository<LandingPage> _repository;
-        public HomeController(IRepository<LandingPage> repository)
+        private readonly ILandingPageService landingPageService;
+
+        public HomeController(ILandingPageService landingPageService)
         {
-            _repository = repository;
+            this.landingPageService = landingPageService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<LandingPageModel> landingPageRows = _repository.GetAll().ToList().ToLandingPageModellList();
-           
-            return View(landingPageRows);
+            var sections = (await landingPageService.LoadRandomSectionsAsync(2))?.ToLandingPageModellList();
+            return View(sections);
         }
     }
 }
