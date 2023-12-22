@@ -12,9 +12,10 @@
             <div class="tm-flex-center p-5">
                 <q class="tm-text-color-gray" dir="rtl" style="text-align:center;">
                     @{
-                        int toSkip = new Random().Next(0, Model.Count());
-                     }
-                    @Model.Skip(toSkip).Take(1).First().section1.ToString()
+                        int toSkip = new Random().Next(0, Model?.Count()??0);
+                        var text = Model?.Skip(toSkip)?.Take(1)?.First()?.section1?.ToString() ?? "";
+                    }
+                    @text
                     </q>
             </div>
         </div>
@@ -28,9 +29,10 @@
                     <h2 class="tm-text-color-primary mb-4" dir="rtl" style="font-family:'B Nazanin';">رضایت مشتریان</h2>
                     <p class="mb-4" dir="rtl" style="font-family:'B Nazanin';">
                         @{
-                            toSkip = new Random().Next(0, Model.Count());
-                         }
-                        "@Model.Skip(toSkip).Take(1).First().section2.ToString()"
+                            int toSkip2 = new Random().Next(0, Model?.Count()??0);
+                            text = Model?.Skip(toSkip2)?.Take(1)?.First()?.section2?.ToString() ?? "";
+                        }
+                        @text
                         
                     </p>
                 </div>
@@ -65,7 +67,7 @@
     <section class="row tm-section tm-mb-30" id="4">
         <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
             <div class="tm-flex-center pl-5 pr-5 pt-5 pb-5">
-                <div class="tm-md-flex-center">
+                <div class="tm-md-flex-center" style="padding: 0px 20px;">
                     <h2 class="mb-4 tm-text-color-primary" dir="rtl">درباره ما</h2>
                     <p class="mb-4" dir="rtl">اپلیکیشن فلان جایی که نوآوری و رضایت مشتری برای برای ما در اولویت هستند. سرویس خدمات مشتری پیشرفته ما، به دقت ساخته شده تا شیوه ارتباط کسب و کارها با مشتریان خود را متحول کند. با تمرکز بر کاربرپسندی و کارایی، پلتفرم ما به طور یکپارچه در جریان کار شما ادغام می شود و تیم پشتیبانی شما را برای ارائه راه حل های سریع و شخصی توانمند می کند.</p>
                     <p class="mb-4" dir="rtl">ما نقش محوری خدمات مشتری درخشان در ایجاد روابط پایدار را درک می کنیم. اپلیکیشن ما فقط یک ابزار نیست. این یک تسریع کننده برای تجربیات مثبت است. چه شما یک استارتاپ باشید که به دنبال ایجاد پایه ای قوی از اعتماد مشتری هستید یا یک شرکت مستقر با هدف ارتقای خدمات شما، پلتفرم ما برای انطباق و مقیاس با نیازهای شما طراحی شده است. در سفری به ما بپیوندید که در آن رضایت مشتری فقط یک هدف نیست - این یک اشتیاق مشترک است که هر ویژگی و نوآوری را به شما ارائه می دهد. تجربه خدمات مشتری خود را با ما ارتقا دهید، جایی که برتری با تعامل روبرو می شود.</p>
