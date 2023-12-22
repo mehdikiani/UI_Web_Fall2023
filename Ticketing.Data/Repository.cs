@@ -77,5 +77,10 @@ namespace Ticketing.Data
             //    return 0;
             return db.SaveChanges();
         }
+
+        public IQueryable<T> GetRandomRow(int count)
+        {
+            return Entities.OrderBy(r => Guid.NewGuid()).Take(count);
+        }
     }
 }

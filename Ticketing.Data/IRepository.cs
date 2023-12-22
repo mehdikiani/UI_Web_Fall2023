@@ -18,5 +18,6 @@ namespace Ticketing.Data
         Task<int> InsertAsync(T entity, CancellationToken token=default);
         Task<int> UpdateAsync(T entity, CancellationToken token = default);
         Task<int> DeleteAsync(T entity, CancellationToken token = default);
+        IQueryable<T> GetRandomRow(int count);
     }
 }
