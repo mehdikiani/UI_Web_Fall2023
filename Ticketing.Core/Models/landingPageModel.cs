@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ticketing.Core.Models
 {
-    public class LandingPageModel
+    public class LandingPageModel : ModelBase
     {
         public string? section1 { get; set; }
         public string? section2 { get; set; }

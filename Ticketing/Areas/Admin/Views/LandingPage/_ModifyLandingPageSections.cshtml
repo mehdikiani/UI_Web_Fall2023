@@ -1,0 +1,19 @@
+﻿@model ModifyLandingPageSectionsModel
+
+<input type="hidden" asp-for="Id" />
+<div class="card-body">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Section1">عنوان</label>
+        <input type="text" class="form-control" asp-for="Section1" placeholder="جمله کلیدی">
+    </div>
+    <div class="form-group">
+        <label asp-for="Section2">عنوان</label>
+        <input type="text" class="form-control" asp-for="Section2" placeholder="رضایت مشتری">
+    </div>
+</div>
+<!-- /.card-body -->
+
+<div class="card-footer">
+    <button type="submit" class="btn btn-primary">Save</button>
+</div>

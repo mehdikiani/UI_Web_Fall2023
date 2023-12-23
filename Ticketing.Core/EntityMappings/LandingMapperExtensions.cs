@@ -19,6 +19,7 @@ namespace Ticketing.Core.EntityMappings
                 {
                     result.Add(new LandingPageModel
                     {
+                        Id = entity.Id,
                         section1 = entity.Section1,
                         section2 = entity.Section2
                     });
