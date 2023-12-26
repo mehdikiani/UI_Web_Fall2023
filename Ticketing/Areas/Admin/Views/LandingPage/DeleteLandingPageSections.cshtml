@@ -1,0 +1,28 @@
+﻿@model DeleteLandingPageSectionsModel
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">حذف بخش ها </h3>
+    </div>      
+    <form asp-controller="LandingPage" asp-action="DeleteLandingPageSections" asp-area="Admin">
+        <div class="card-body">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Section1" />
+            <input type="hidden" asp-for="Section2" />
+            <div asp-validation-summary="All"></div>
+            <div class="alert alert-danger">
+                آیا بخش های زیر حذف شوند؟
+                <br />
+                '@(Model.Section1)'
+                '@(Model.Section2)'
+                <br/>
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="بله" class="btn btn-danger" />
+            <a asp-action="List" asp-controller="LandingPage" asp-area="Admin" class="btn btn-primary">خیر</a>
+
+        </div>
+    </form>
+</div>

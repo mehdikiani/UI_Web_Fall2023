@@ -3,11 +3,57 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="~/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/header.css" rel="stylesheet" />
+    <link href="~/css/landing.css" rel="stylesheet" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
+    <header>
+        <h1>UI Web</h1>
+        <nav>
+            <a href=#4>درباره ما</a>
+            <a href=#6>ارتباط با ما</a>
+            <a href=#>خانه</a>
+        </nav>
+    </header>
     <div>
         @RenderBody()
     </div>
+    <footer>
+        <!-- 6th Section -->
+        <section class="row" id="6">
+            <div class="col-lg-12 tm-bg-color-primary tm-text-color-white tm-font-thin tm-form-footer">
+                <div class="row tm-container-inner">
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="tm-footer-info-box">
+                            <h4>ارتباط با ما</h4>
+                            <h5>شماره تماس</h5>
+                            <p>
+                                +989123456789<br>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="tm-footer-info-box">
+                            <h5>آدرس</h5>
+                            <address>
+                                اصفهان خیابان هزار جریب<br>
+                                دانشکده فنی مهندسی<br>
+                                کلاس 14
+                            </address>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="text-center small tm-copyright-text mb-0">Copyright &copy; <span class="tm-current-year">2023</span> UI Web | Designed by <a href="https://github.com/Ali-Pourgheysari" class="tm-text-color-gray" target="_parent">Ali Pourgheysari</a></p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

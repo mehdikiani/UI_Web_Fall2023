@@ -13,10 +13,14 @@ services.AddDbContext<TicketDbContext>(
     }
     );
 
+//services.AddTransient<ITicketRepository, TicketRepository>();
+
+services.AddTransient(typeof(IRepository<>),typeof(Repository<>));
 
 services.AddTransient<ITicketService, TicketService>();
 services.AddTransient<ISectionService, SectionService>();
 services.AddTransient<ILogSerivce, LogService>();
+services.AddTransient<ILandingPageService, LandingPageService>();
 
 var app = builder.Build();
 

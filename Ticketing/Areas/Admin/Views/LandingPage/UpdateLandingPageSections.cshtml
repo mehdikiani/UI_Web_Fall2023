@@ -1,0 +1,12 @@
+﻿@model ModifyLandingPageSectionsModel
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">ویرایش بخش ها</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form asp-controller="LandingPage" asp-action="UpdateLandingPageSections" asp-area="Admin">
+        <partial name="_ModifyLandingPageSections" model="@Model" />
+    </form>
+</div>

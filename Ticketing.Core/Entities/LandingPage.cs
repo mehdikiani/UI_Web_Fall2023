@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ticketing.Core.Entities
 {
-    public class EntityBase 
+    public class LandingPage : EntityBase
     {
-        public int Id { get; set; }
-
-        //public virtual bool IsValidState(EntityAction action = EntityAction.None) { return true; }
-
+        public string? Section1 { get; set; }
+        public string? Section2 { get; set; }
     }
 }

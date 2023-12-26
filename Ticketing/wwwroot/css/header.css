@@ -1,0 +1,55 @@
+﻿header {
+    font-family: 'B Nazanin';
+    width: 100%;
+    padding: 1em;
+    font-size: 140%;
+    position: absolute;
+    top: 100vh;
+    left: 0;
+    transition: opacity .2s ease-in-out;
+    text-align: center;
+}
+
+    header h1 {
+        font-weight: 600;
+        display: inline;
+        margin: 0;
+        padding: 0;
+        font-size: inherit;
+        color: #993333;
+    }
+
+nav a {
+    display: inline-block;
+    outline: none;
+    text-decoration: none;
+    opacity: .7;
+    padding: 0 .5em;
+    color: #993333;
+    transition: opacity .2s ease-in-out;
+}
+
+    nav a:hover,
+    nav a:focus {
+        opacity: 1;
+    }
+
+@media (min-width: 500px) {
+    header {
+        text-align: left;
+    }
+
+    nav {
+        float: right;
+    }
+}
+
+
+
+header {
+    position: fixed;
+    top: 0;
+    background: white;
+    box-shadow: rgba(0,0,0,.05) 0 3px 15px;
+}
+

@@ -21,5 +21,23 @@ namespace Ticketing.Core.Entities
 
         // section => ticket : one =>many
 
+        //public override bool IsValidState(EntityAction action)
+        //{
+        //    switch (action)
+        //    {
+        //        case EntityAction.None:
+        //            break;
+        //        case EntityAction.Insert:
+        //            break;
+        //        case EntityAction.Update:
+        //            break;
+        //        case EntityAction.Delete:
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //    return base.IsValidState();
+        //}
+
     }
 }

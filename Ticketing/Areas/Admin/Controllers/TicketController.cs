@@ -23,34 +23,38 @@ namespace Ticketing.Areas.Admin.Controllers
             this.sectionService = sectionService;
         }
         public IActionResult Index() => RedirectToAction(nameof(List));
-        public IActionResult List()
+
+        [HttpGet]
+        public async Task<IActionResult> List()
         {
-            var model = ticketService.GetAllTickets()?.ToTicketModelList();
+            var model = (await ticketService.GetAllTicketsAsync())?.ToTicketModelList();
             return View(model);
         }
-        public IActionResult SectionTickets(int secId)
+        [HttpGet]
+        public async Task<IActionResult> SectionTickets(int secId)
         {
-            var model = ticketService.GetTicketsBySectionId(secId)?.ToTicketModelList();
+            var model = (await ticketService.GetTicketsBySectionIdAsync(secId))?.ToTicketModelList();
             return View(model);
         }
         #region CreateTicket
         [HttpGet]
-        public IActionResult CreateTicket()
+        public async Task<IActionResult> CreateTicket()
         {
             var model = new ModifyTicketModel();
-            model.Sections = sectionService.GetAllSections()?.ToSectionModelList();
-
+            await PrepareModelAsync(model);
             return View(model);
         }
         [HttpPost]
-        public IActionResult CreateTicket(ModifyTicketModel model)
+        public async Task<IActionResult> CreateTicket(ModifyTicketModel model)
         {
+
             if (!ModelState.IsValid)
             {
+                await PrepareModelAsync(model);
                 return View(model);
             }
 
-            ticketService.AddTicket(model.Title, model.Description, model.SectionId);
+            await ticketService.AddTicketAsync(model.Title, model.Description, model.SectionId);
 
             return RedirectToAction(nameof(List));
         }
@@ -58,7 +62,7 @@ namespace Ticketing.Areas.Admin.Controllers
 
         #region Update Ticket
         [HttpGet]
-        public IActionResult UpdateTicket(int id)
+        public async Task<IActionResult> UpdateTicket(int id)
         {
             //Authentication Authorization Accounting
             var ticket = ticketService.GetTicketById(id);
@@ -72,27 +76,32 @@ namespace Ticketing.Areas.Admin.Controllers
             {
                 Id = ticket.Id,
                 Title = ticket.Title,
-                Description = ticket.Description
+                Description = ticket.Description,
+                SectionId = ticket.SectionId
             };
+            await PrepareModelAsync(model);
             return View(model);
         }
         [HttpPost]
-        public IActionResult UpdateTicket(ModifyTicketModel model)
+        public async Task<IActionResult> UpdateTicket(ModifyTicketModel model)
         {
+
             if (!ModelState.IsValid)
             {
+              await  PrepareModelAsync(model);
                 return View(model);
             }
-            var ticket = ticketService.GetTicketById(model.Id);
+            var ticket =await ticketService.GetTicketByIdAsync(model.Id);
             if (ticket == null)
             {
                 ModelState.AddModelError("", "invalid ticket");
+               await PrepareModelAsync(model);
                 return View(model);
             }
             ticket.Title = model.Title;
             ticket.Description = model.Description;
             ticket.ModifyDate = DateTime.Now;
-            var result = ticketService.UpdateTicket(ticket);
+            var result =await ticketService.UpdateTicketAsync(ticket);
             if (result > 0)
             {
                 AddSuccess("Ticket was updated successfully");
@@ -101,6 +110,7 @@ namespace Ticketing.Areas.Admin.Controllers
             else
             {
                 ModelState.AddModelError("", "Error on updating. Please try again.");
+               await PrepareModelAsync(model);
                 return View(model);
             }
 
@@ -111,10 +121,10 @@ namespace Ticketing.Areas.Admin.Controllers
 
         #region Delete Ticket
         [HttpGet]
-        public IActionResult DeleteTicket(int id)
+        public async Task<IActionResult> DeleteTicket(int id)
         {
             //Authentication Authorization Accounting
-            var ticket = ticketService.GetTicketById(id);
+            var ticket =await ticketService.GetTicketByIdAsync(id);
             if (ticket == null)
             //throw new ArgumentException("Ticket not found");
             {
@@ -129,19 +139,19 @@ namespace Ticketing.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult DeleteTicket(DeleteTicketModel model)
+        public async Task<IActionResult> DeleteTicket(DeleteTicketModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var ticket = ticketService.GetTicketById(model.Id);
+            var ticket =await ticketService.GetTicketByIdAsync(model.Id);
             if (ticket == null)
             {
                 ModelState.AddModelError("", "invalid ticket");
                 return View(model);
             }
-            var result = ticketService.DeleteTicket(ticket);
+            var result =await ticketService.DeleteTicketAsync(ticket);
             if (result > 0)
             {
                 AddSuccess("Ticket was deleted successfully");
@@ -155,5 +165,10 @@ namespace Ticketing.Areas.Admin.Controllers
 
         }
         #endregion
+
+        private async Task PrepareModelAsync(ModifyTicketModel model)
+        {
+            model.Sections = (await sectionService.GetAllSectionsAsync())?.ToSectionModelList();
+        }
     }
 }
