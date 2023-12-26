@@ -27,7 +27,7 @@ namespace Ticketing.Data
                 return entities;
             }
         }
-        public int Delete(T entity)
+        public virtual int Delete(T entity)
         {
             //if (!entity.IsValidState(EntityAction.Delete))
             //    return 0;
@@ -35,18 +35,18 @@ namespace Ticketing.Data
             return db.SaveChanges();
         }
 
-        public async Task<int> DeleteAsync(T entity, CancellationToken token = default)
+        public virtual async Task<int> DeleteAsync(T entity, CancellationToken token = default)
         {
             Entities.Remove(entity);
             return await db.SaveChangesAsync();
         }
 
-        public IQueryable<T> GetAll()
+        public virtual IQueryable<T> GetAll()
         {
             return Entities;
         }
 
-        public int Insert(T entity)
+        public virtual int Insert(T entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
@@ -56,7 +56,7 @@ namespace Ticketing.Data
             return db.SaveChanges();
         }
 
-        public async Task<int> InsertAsync(T entity, CancellationToken token = default)
+        public virtual async Task<int> InsertAsync(T entity, CancellationToken token = default)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
@@ -66,12 +66,12 @@ namespace Ticketing.Data
             return await db.SaveChangesAsync();
         }
 
-        public async Task<int> UpdateAsync(T entity, CancellationToken token = default)
+        public virtual async Task<int> UpdateAsync(T entity, CancellationToken token = default)
         {
             return await db.SaveChangesAsync();
         }
 
-        public int Update(T entity)
+        public virtual int Update(T entity)
         {
             //if (!entity.IsValidState(EntityAction.Update))
             //    return 0;

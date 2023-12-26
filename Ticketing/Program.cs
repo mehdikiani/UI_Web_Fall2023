@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Ticketing.Data;
 using Ticketing.Services;
@@ -12,7 +13,13 @@ services.AddDbContext<TicketDbContext>(
         options.UseSqlServer(config.GetConnectionString("TicketConn"));
     }
     );
+services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.LoginPath = new PathString("/home/index");
+                options.ExpireTimeSpan = TimeSpan.FromHours(3);
 
+            });
 //services.AddTransient<ITicketRepository, TicketRepository>();
 
 services.AddTransient(typeof(IRepository<>),typeof(Repository<>));
@@ -20,11 +27,16 @@ services.AddTransient(typeof(IRepository<>),typeof(Repository<>));
 services.AddTransient<ITicketService, TicketService>();
 services.AddTransient<ISectionService, SectionService>();
 services.AddTransient<ILogSerivce, LogService>();
-
+services.AddTransient<IRandomDataService, RandomDataService>();
 var app = builder.Build();
 
 app.UseStaticFiles();
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+
 app.UseEndpoints(ep =>
 {
     //ep.MapDefaultControllerRoute();

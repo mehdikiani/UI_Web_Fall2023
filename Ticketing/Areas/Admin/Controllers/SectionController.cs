@@ -4,9 +4,11 @@ using Ticketing.Core;
 using Ticketing.Services;
 using Ticketing.Core.EntityMappings;
 using Ticketing.Data;
+using Microsoft.AspNetCore.Authorization;
 namespace Ticketing.Areas.Admin.Controllers
 {
     [Area("Admin")]
+
     public class SectionController : BaseAdminController
     {
         private readonly ISectionService sectionService;
@@ -25,11 +27,12 @@ namespace Ticketing.Areas.Admin.Controllers
 
         #region CreateSection
         [HttpGet]
-        public  IActionResult CreateSection()
+        public IActionResult CreateSection()
         {
             return View(new ModifySectionModel());
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateSection(ModifySectionModel model)
         {
             if (!ModelState.IsValid)
