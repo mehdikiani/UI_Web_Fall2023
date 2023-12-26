@@ -1,12 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Ticketing.Core;
+using Ticketing.Core.Entities;
+using Ticketing.Data;
 
 namespace Ticketing.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class HomeController : Controller
+    //  [DisableTestActionFilter]
+    public class HomeController : BaseAdminController
     {
-
+        public HomeController()
+        {
+                
+        }
         public IActionResult Index()
         {
             var jsonData = JsonConvert.SerializeObject(new Person
@@ -15,6 +22,12 @@ namespace Ticketing.Areas.Admin.Controllers
                 Name = "Kiani"
             });
             ViewBag.Data = jsonData;
+            return View();
+        }
+        [TypeFilter(typeof(TestActionFilterAttribute))]
+        public IActionResult Test(string randomData)
+        {
+            ViewBag.RandomData = randomData;
             return View();
         }
     }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Ticketing.Core.Models.LandingPageModel>
+@model IEnumerable<Ticketing.Core.Models.LandingPageModel>
 <div class="container">
 
     <!-- 1st section -->
@@ -78,4 +78,13 @@
             <img src="img/image-02.jpg" alt="Image" class="img-fluid">
         </div>
     </section>
+</div>
+
+<div class="mb-2">
+    Site Index
+</div>
+<div>
+    <form asp-action="login" asp-controller="home" asp-area="" method="post">
+        <input  type="submit" value="Login" class="btn btn-primary"/>
+    </form>
 </div>
