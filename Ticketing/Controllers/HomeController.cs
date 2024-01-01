@@ -5,12 +5,24 @@ using Ticketing.Core;
 using Ticketing.Core.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
 namespace Ticketing.Controllers
 {
 
     public class HomeController : Controller
     {
-        public IActionResult Index() => View();
+        private readonly ShaparakSetting shaparakSetting;
+
+        public HomeController(
+            IOptions<ShaparakSetting> shaparakOptions) 
+        {
+            this.shaparakSetting = shaparakOptions.Value;
+        }
+        public IActionResult Index()
+        {
+            ViewBag.ApiKey = shaparakSetting.ApiKey;
+           return View();
+        }
 
         [HttpPost]
         [AllowAnonymous]

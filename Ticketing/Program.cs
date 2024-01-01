@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Ticketing.Core;
 using Ticketing.Data;
 using Ticketing.Services;
 
@@ -28,6 +29,9 @@ services.AddTransient<ITicketService, TicketService>();
 services.AddTransient<ISectionService, SectionService>();
 services.AddTransient<ILogSerivce, LogService>();
 services.AddTransient<IRandomDataService, RandomDataService>();
+
+services.Configure<ShaparakSetting>(config.GetSection("Shaparak")); 
+
 var app = builder.Build();
 
 app.UseStaticFiles();
